@@ -1417,7 +1417,7 @@ ExecStart=-/sbin/agetty --autologin $USER --noclear %I \$TERM
 EOF
         ;;
       B3*)
-        if [ -e /etc/init.d/lightdm ]; then
+        if is_installed lightdm; then
           systemctl --quiet set-default graphical.target
           rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf
           sed /etc/lightdm/lightdm.conf -i -e "s/^autologin-user=.*/#autologin-user=/"
@@ -1428,9 +1428,8 @@ EOF
         fi
         ;;
       B4*)
-        if [ -e /etc/init.d/lightdm ]; then
+        if is_installed lightdm; then
           systemctl --quiet set-default graphical.target
-          cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf << EOF
 [Service]
 ExecStart=
 ExecStart=-/sbin/agetty --autologin $USER --noclear %I \$TERM
