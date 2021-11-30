@@ -6,7 +6,7 @@
 INTERACTIVE=True
 ASK_TO_REBOOT=0
 BLACKLIST=/etc/modprobe.d/raspi-blacklist.conf
-MODULES=/etc/modules-load.d/raspi-conf.conf
+MODULES=/etc/modules-load.d/raspberrypi.conf
 CONFIG=/boot/config.txt
 
 USER=${SUDO_USER:-$(who -m | awk '{ print $1 }')}
