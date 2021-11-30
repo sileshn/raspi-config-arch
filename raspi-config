@@ -119,6 +119,12 @@ is_installed() {
   pacman -Qq "$1" >/dev/null 2>&1 && return 0 || return 1
 }
 
+install_realvnc() {
+  curl -LO https://github.com/sileshn/realvnc-vnc-server/releases/download/6.10.0-2/realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
+  pacman -U --noconfirm realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
+  rm realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
+}
+
 install_package() {
   pacman -S $@
 }
@@ -891,7 +897,7 @@ do_vnc() {
     APT_GET_FLAGS="-y"
   fi
   if [ $RET -eq 0 ]; then
-    if is_installed realvnc-vnc-server || install_package realvnc-vnc-server; then
+    if is_installed realvnc-vnc-server || install_realvnc; then
       systemctl enable vncserver-x11-serviced.service &&
       systemctl start vncserver-x11-serviced.service &&
       STATUS=enabled
