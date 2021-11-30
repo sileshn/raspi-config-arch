@@ -834,7 +834,7 @@ clear_overclock () {
 }
 
 get_ssh() {
-  if service ssh status | grep -q inactive; then
+  if systemctl status sshd | grep -q -w inactive; then
     echo 1
   else
     echo 0
@@ -859,14 +859,20 @@ do_ssh() {
     RET=$1
   fi
   if [ $RET -eq 0 ]; then
-    ssh-keygen -A &&
-    update-rc.d ssh enable &&
-    invoke-rc.d ssh start &&
-    STATUS=enabled
+	if is_installed openssh || install_package openssh; then
+    	ssh-keygen -A &&
+    	systemctl enable sshd &&
+    	systemctl start sshd &&
+    	STATUS=enabled
+	else
+		return 1
+	fi
   elif [ $RET -eq 1 ]; then
-    update-rc.d ssh disable &&
-    invoke-rc.d ssh stop &&
-    STATUS=disabled
+	if is_installed openssh; then
+    	systemctl disable sshd
+    	systemctl stop sshd
+	fi    
+	STATUS=disabled
   else
     return $RET
   fi
