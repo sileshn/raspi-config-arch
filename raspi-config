@@ -126,7 +126,7 @@ install_realvnc() {
 }
 
 install_package() {
-  pacman -S $@
+  sudo pacman -U --noconfirm $@
 }
 
 update_package_database() {
