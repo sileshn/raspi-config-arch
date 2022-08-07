@@ -2181,7 +2181,6 @@ do_net_names () {
 
 do_update() {
   update_package_database &&
-  install_package raspi-config &&
   printf "Sleeping 5 seconds before reloading raspi-config\n" &&
   sleep 5 &&
   exec raspi-config
