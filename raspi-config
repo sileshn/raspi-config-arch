@@ -120,9 +120,9 @@ is_installed() {
 }
 
 install_realvnc() {
-  curl -LO https://github.com/sileshn/realvnc-vnc-server/releases/download/6.10.0-2/realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
-  pacman -U --noconfirm realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
-  rm realvnc-vnc-server-6.10.0-2-aarch64.pkg.tar.zst
+  curl -LO https://github.com/sileshn/realvnc-vnc-server/releases/download/6.10.1-1/realvnc-vnc-server-6.10.1-1-aarch64.pkg.tar.zst
+  pacman -U --noconfirm realvnc-vnc-server-6.10.1-1-aarch64.pkg.tar.zst
+  rm realvnc-vnc-server-6.10.1-1-aarch64.pkg.tar.zst
 }
 
 install_package() {
